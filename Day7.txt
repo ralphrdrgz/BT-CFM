@@ -1,0 +1,26 @@
+1.) Find onRequestStart() — list every item that gets put into the request.* scope.
+    request.qb = new qb.models.Query.QueryBuilder(
+    	grammar = new qb.models.Grammars.SqlServerGrammar(),
+    	utils = new qb.models.Query.QueryUtils( convertEmptyStringsToNull = true )
+    );
+    request.url = new components.routing.UrlGenerator();
+    request.request = components.support.http.Request::capture();
+    request.helpers = new components.Helpers();
+
+    // I'm open to a better name for this.
+    request.asset = new components.Asset();
+
+    // Fetch Site Settings - TODO: Figure out a good way to cache this in application scope so we don't have to query this on every request.
+    request.siteSettings = getSiteSettings();
+
+    request.adminService = new components.auth.AdminService();
+/***/
+2.) Find where request.siteSettings is set.
+    request.siteSettings is pull from the Datasource and used multiple times throughout the application since the table contains most of the apps identity.
+/***/
+
+3.) Find where request.url is set and identify which CFC it is.     components/routing/UrlGenerator.cfc
+/***/
+4.) Find where this.directory is set and identify which CFC it is.
+    by calling this.directory = getDirectoryFromPath( getCurrentTemplatePath() );
+/***/
