@@ -1,0 +1,34 @@
+Open the repo. 
+Trace through these files in order — just read them, do not edit: 
+For each file, write one sentence in a notes doc describing what it does and when it runs.
+
+
+
+(1) /index.cfm
+• first one to load initiates app_globals followed by html structure containers like head, body, footer.
+
+
+(2) /app_globals.cfm
+• validates forms, moves page parameters to session and responsible for creating breadcrumbs. This file fires once the index is initiated.
+
+
+(3) /queries/qry_getSiteSettings.cfm
+• pulls site settings and sets which profile or theme to use. Not sure yet when it initiates.
+
+
+(4) /sections/home/url_routing.cfm
+• Sets the homepage and pulls data from /url_defineSubsection.cfm. Not sure yet when it initiates.
+
+
+(5) /url_defineSubsection.cfm
+• identifies which homepage sections or subsection should it push. Relies to sections/home/url_routing.cfm when to initiates.
+
+
+(6) /sections/home/index.cfm
+• evaluates the contents of the <main> on the homepage and pull the needed .cfm files may it query, action and display file. Not sure yet when it initiates.
+
+
+(7) /views/layout/dsp_header.cfm
+• Folder Path non existing.
+
+
