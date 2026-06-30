@@ -1,0 +1,18 @@
+Exercise
+Open /widgets/dsp_wgt_imageAndText.cfm. 
+(1) Identify how it reads its settings from the block data. 
+- Using 'widget',  the 'widget' contains collection of results which individually being pull by query. like using primary key to pull the entire table.
+
+
+
+(2) Find where the Imgix URL is being built. 
+- Imgix uses the variable widgetImage to collate the data. It is residing on dsp_wgt_image.cfm file
+
+
+(3) Open a frontend page that uses page blocks (try sCustomPages/index.cfm or sAbout/index.cfm). Trace from the section index.cfm to the widget include. 
+- The index.cfm file it initiates dsp_home.cfm which pulls multiple templates including the page blocks.
+
+
+(4) In the admin, look at /admin/sections/blog/dsp_form.cfm and find the MediaFinder widget usage — identify what entityType and group are being passed.
+- MediaFinder pulls properties from the database. the Entity ranges from Image group, SEO fields and PDF files.
+
