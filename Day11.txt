@@ -3,16 +3,34 @@ Open /widgets/dsp_wgt_imageAndText.cfm.
 (1) Identify how it reads its settings from the block data. 
 - Using 'widget',  the 'widget' contains collection of results which individually being pull by query. like using primary key to pull the entire table.
 
+Insights from Gene: Every widget has a content table and a settings table. Any of the settings data gets stored in the settings table. When that data is pulled in, there are components that run to combine it all into the 'widget' output on the front end. 
+
+
 
 
 (2) Find where the Imgix URL is being built. 
 - Imgix uses the variable widgetImage to collate the data. It is residing on dsp_wgt_image.cfm file
 
+Insights from Gene: I'm not really sure exactly what type of answer this one was looking for, but on this file dsp_wgt_imageAndText.cfm
+  2.A. Line 86 is where the component is run to pull the image data and set it into widgetImages
+  2.B. Then on line 258, there is an example of the widgetImages being used by running the img() function to build out the <image> element. 
+
+
 
 (3) Open a frontend page that uses page blocks (try sCustomPages/index.cfm or sAbout/index.cfm). Trace from the section index.cfm to the widget include. 
 - The index.cfm file it initiates dsp_home.cfm which pulls multiple templates including the page blocks.
 
+Insights from Gene: This one's a little tricky since we use different methods for building hybrid custom pages, but as far as the sCustomPages section:
+  The path would go from sCustomPages/index.cfm -> sCustomPages/dsp_customPage.cfm -> includes/inc_outputPageBlocks.cfm(Line 12)
+
 
 (4) In the admin, look at /admin/sections/blog/dsp_form.cfm and find the MediaFinder widget usage — identify what entityType and group are being passed.
 - MediaFinder pulls properties from the database. the Entity ranges from Image group, SEO fields and PDF files.
+
+Insights from Gene: 
+4.A. The entityType for all of them would be 'Blog'. The entityType always matches the section it is being used in. This gets used on the front end to pull images of the same type. For example, it would pull all 'Blog' images from the blog admin. 
+4.B. The group attribute is used to target all related images for a specific usage. For example, the 'ListImage' group would be any image that is being used as the listing image for a blog.
+  4.B.I.  This file has a few different MediaFinder instances with groups like 'ListImage', 'PDF', and 'ContentImage'. 
+  4.B.II. The group attribute can use any value that's appropriate for the type of image being added. For example, if you were adding a new image field for an author image, you could set the group to 'AuthorImage'. 
+4.C. Just for clarification, these MediaFinder instances are what build out the image field for the admin forms. This allows us to easily generate new image fields when updating admin sections.
 
